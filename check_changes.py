@@ -21,7 +21,7 @@ if "vyos.yml" in changes or "dynamic-network-groups.py" in changes:
 # if changes in tasks: add all sites to list of executed things
 for change in changes:
     for site in sites:
-        if f"{site}/" in change or f"host_vars/{sites[site]}" in changes:
+        if f"{site}/" in change or f"host_vars/{sites[site]}" in change:
             hosts.add(sites[site])
             break
     else:
