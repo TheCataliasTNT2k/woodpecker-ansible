@@ -19,6 +19,7 @@ if [[ -f /home/worker/jobs.sh ]]; then
     #  if changes have been made to a specific site it will be added to the hosts list
     #  if changes have been made to all sites, all sites will be returned
     export HOSTS=$(python3 /home/worker/check_changes.py $(git diff --name-only HEAD HEAD~1 | xargs))
+    echo "${HOSTS}"
 
     if [ -z "${HOSTS}" ]; then
         echo "No relevant changes detected, exiting..."

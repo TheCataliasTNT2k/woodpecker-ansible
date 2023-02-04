@@ -16,12 +16,12 @@ if "vyos.yml" in changes or "dynamic-network-groups.py" in changes:
     print(" ".join(all_hosts))
     exit(0)
 
-# if changes in host_vars, check filename to determine which machine needs to be executed
-# if changes in tasks/SITE: add SITE to list of executed things
+# if changes in host_vars, check filename ("host_vars/{sites[site]}") to determine which machine needs to be executed
+# if changes in tasks/{site}: add {site} to list of executed things
 # if changes in tasks: add all sites to list of executed things
 for change in changes:
     for site in sites:
-        if f"{site}/" in change:
+        if f"{site}/" in change or f"host_vars/{sites[site]}" in changes:
             hosts.add(sites[site])
             break
     else:
